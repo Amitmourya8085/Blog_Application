@@ -5,7 +5,9 @@ import com.amitmourya8085.blog.DTO.UserRequestDTO;
 import com.amitmourya8085.blog.DTO.UserResponseDTO;
 import com.amitmourya8085.blog.Entity.User;
 import com.amitmourya8085.blog.Repositary.UserRepository;
+import com.amitmourya8085.blog.config.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,19 +17,29 @@ public class UserServiceImp implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private User user;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
 
 
     @Override
     public UserResponseDTO registerUser(UserRequestDTO request) {
         //VALIDATE EMAIL
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Email already exists");
         }
            // DTO TO ENTITY
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         User saved = userRepository.save(user);
             //ENTITY TO DTO
@@ -38,20 +50,19 @@ public class UserServiceImp implements UserService {
         );
     }
 
+
     @Override
     public String login(LoginRequest request) {
-        Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
 
-        if(!userOptional.isEmpty())
-            return "user not Found";
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        User user = userOptional.get();
-
-        if(!user.getPassword().equals(request.getEmail())){
-            return "Invalid Password";
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid password");
         }
 
-        return "Login Successfully";
+        // Generate JWT Token
+        return jwtUtil.generateToken(user.getEmail());
     }
 
 }
