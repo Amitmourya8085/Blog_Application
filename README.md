@@ -25,7 +25,9 @@ A secure backend application built using Spring Boot that provides user authenti
 
 ---
 
-##Project Structure
+
+## 📁 Project Structure
+```text
 
 src/
  ├── config/          # Security Configuration
