@@ -39,7 +39,7 @@ src/
 
 ---
 
-## Authentication Flow
+ Authentication Flow
 
 1. User registers
 2. User logs in
@@ -49,7 +49,7 @@ src/
 
 ---
 
-##API Endpoints
+API Endpoints
 
 🟢 Public APIs
 
@@ -59,7 +59,7 @@ POST| "/api/users/login"| Login and get token
 
 ---
 
-##Protected APIs
+Protected APIs
 
 Method| Endpoint| Description
 GET| "/api/blogs"| Get all blogs
@@ -71,7 +71,7 @@ Authorization: Bearer <your_token>
 
 ---
 
-##Example Login Request
+Example Login Request
 
 {
   "email": "test@example.com",
@@ -80,13 +80,13 @@ Authorization: Bearer <your_token>
 
 ---
 
-## Example Response
+ Example Response
 
 eyJhbGciOiJIUzI1NiJ9...
 
 ---
 
-##Setup Instructions
+Setup Instructions
 
 1. Clone repository
 
