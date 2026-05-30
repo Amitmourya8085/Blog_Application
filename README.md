@@ -1,4 +1,4 @@
-🚀 Finance Tracker API (Spring Boot + JWT)
+## Finance Tracker API (Spring Boot + JWT)
 
 A secure backend application built using Spring Boot that provides user authentication and protected APIs using JWT (JSON Web Token).
 
@@ -25,7 +25,7 @@ A secure backend application built using Spring Boot that provides user authenti
 
 ---
 
-📁 Project Structure
+##Project Structure
 
 src/
  ├── config/          # Security Configuration
@@ -37,7 +37,7 @@ src/
 
 ---
 
-🔐 Authentication Flow
+## Authentication Flow
 
 1. User registers
 2. User logs in
@@ -47,7 +47,7 @@ src/
 
 ---
 
-🔑 API Endpoints
+##API Endpoints
 
 🟢 Public APIs
 
@@ -57,7 +57,7 @@ POST| "/api/users/login"| Login and get token
 
 ---
 
-🔒 Protected APIs
+##Protected APIs
 
 Method| Endpoint| Description
 GET| "/api/blogs"| Get all blogs
@@ -69,7 +69,7 @@ Authorization: Bearer <your_token>
 
 ---
 
-🧪 Example Login Request
+##Example Login Request
 
 {
   "email": "test@example.com",
@@ -78,13 +78,13 @@ Authorization: Bearer <your_token>
 
 ---
 
-✅ Example Response
+## Example Response
 
 eyJhbGciOiJIUzI1NiJ9...
 
 ---
 
-⚙️ Setup Instructions
+##Setup Instructions
 
 1. Clone repository
 
@@ -100,11 +100,6 @@ mvn spring-boot:run
 
 ---
 
-⚠️ Important Notes
-
-- JWT secret key must be at least 32 characters
-- Always keep your secret key secure
-- Do not expose tokens publicly
 
 ---
 
