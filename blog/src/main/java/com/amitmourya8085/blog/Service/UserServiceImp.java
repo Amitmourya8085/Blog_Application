@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,6 +64,18 @@ public class UserServiceImp implements UserService {
 
         // Generate JWT Token
         return jwtUtil.generateToken(user.getEmail());
+    }
+
+    @Override
+    public List<UserResponseDTO> getAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(user ->new UserResponseDTO(
+                        user.getId(),
+                        user.getName(),
+                        user.getEmail()
+                ))
+                .toList();
     }
 
 }
